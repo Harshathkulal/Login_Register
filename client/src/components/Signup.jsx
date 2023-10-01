@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Signup = () => {
@@ -9,13 +9,16 @@ const Signup = () => {
   const [name,setName]=useState()
   const [email,setEmail]=useState()
   const [password,setPassword]=useState()
+  const navigate=useNavigate()
 
   const handlesubmit=(e)=>{
-     e.preventDefault()
-     axios.post('http://localhost:3001/register',{name,email,password})
-     .then(result=>console.log(result))
+     e.preventDefault();
+     axios.post('http://localhost:3001/register',{name:name,email:email,password:password})
+     .then(result=>{console.log(result)
+      navigate('/login')
+     })
      .catch(err=>{console.log(err)})
-  }
+  };
 
 
   return (
@@ -62,7 +65,7 @@ const Signup = () => {
             />
           </div>
           <button type="submit" className="btn btn-primary w-100 rounded-1">
-            Submit
+            SignUp
           </button>
         </form>
         <p>Already have a Account?</p>

@@ -11,14 +11,28 @@ app.use(cors())
 
 mongoose.connect("mongodb://127.0.0.1:27017/employee");
 
-app.post('/register',(req,res)=>{
+app.post('/login', (req, res) => {
+    const {email,password}=req.body;
+    EmployeeModel.findOne({email:email})
+    .then(user=>{
+        if(user){
+            if(user.password===password){
+                res.json("success")
+            }else{
+                res.json("the paaword is incorrect")
+            }
+        }else{
+            res.json("No Record exist")
+        }
+    })
+});
+
+app.post('/register', (req, res) => {
     EmployeeModel.create(req.body)
-    console.log(req.body)
-    .then(employee=>res.json(employee))
-    .catch(err=>res.json(err))
-
-
-})
+      .then(employee => res.json(employee))
+      .catch(err => res.json(err));
+  });
+  
 
 app.listen(PORT,()=>{
     console.log(`server is running at ${PORT}`)
