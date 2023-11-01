@@ -9,7 +9,13 @@ const app=express()
 app.use(express.json())
 app.use(cors())
 
-mongoose.connect("mongodb://127.0.0.1:27017/employee");
+mongoose.connect("mongodb+srv://harshathmkulal:Harsha5@cluster0.2z2m0en.mongodb.net/employees?retryWrites=true&w=majority")
+.then(() => {
+    console.log("Connected To DB");
+  })
+  .catch((err) => {
+    console.log(`Connection Failed to DB ${err}`);
+  });
 
 app.post('/login', (req, res) => {
     const {email,password}=req.body;
@@ -19,7 +25,7 @@ app.post('/login', (req, res) => {
             if(user.password===password){
                 res.json("success")
             }else{
-                res.json("the paaword is incorrect")
+                res.json("the password is incorrect")
             }
         }else{
             res.json("No Record exist")
