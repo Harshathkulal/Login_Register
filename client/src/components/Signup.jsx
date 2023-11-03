@@ -13,8 +13,9 @@ const Signup = () => {
 
   const handlesubmit=(e)=>{
      e.preventDefault();
-     axios.post('http://localhost:3001/register',{name:name,email:email,password:password})
-     .then(result=>{console.log(result)
+     axios.post('http://localhost:3001/',{name:name,email:email,password:password})
+     .then(result=>{
+      //console.log(result)
       navigate('/login')
      })
      .catch(err=>{console.log(err)})

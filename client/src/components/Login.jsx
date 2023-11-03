@@ -15,7 +15,7 @@ const Login = () => {
     axios
       .post("http://localhost:3001/login", { email: email, password: password })
       .then((result) => {
-        console.log(result);
+        //console.log(result);
         if (result.data === "success") {
           navigate("/home");
         } else if (result.data === "the password is incorrect") {
@@ -67,7 +67,7 @@ const Login = () => {
           </button>
         </form>
         <p>Don't have an account?</p>
-        <Link to="/register" className="btn btn-primary w-100 rounded-1">
+        <Link to="/" className="btn btn-primary w-100 rounded-1">
           SignUp
         </Link>
       </div>

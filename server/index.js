@@ -2,14 +2,16 @@ const express = require("express")
 const mongoose = require("mongoose")
 const cors = require("cors")
 const EmployeeModel = require("./models/Employee")
+require('dotenv').config();
 
-const PORT=3001;
+const PORT = process.env.PORT;
 
 const app=express()
 app.use(express.json())
 app.use(cors())
 
-mongoose.connect("mongodb+srv://harshathmkulal:Harsha5@cluster0.2z2m0en.mongodb.net/employees?retryWrites=true&w=majority")
+const DB = process.env.DATABASE;
+mongoose.connect(DB, { useNewUrlParser: true, useUnifiedTopology: true })
 .then(() => {
     console.log("Connected To DB");
   })
@@ -33,7 +35,7 @@ app.post('/login', (req, res) => {
     })
 });
 
-app.post('/register', (req, res) => {
+app.post('/', (req, res) => {
     EmployeeModel.create(req.body)
       .then(employee => res.json(employee))
       .catch(err => res.json(err));
