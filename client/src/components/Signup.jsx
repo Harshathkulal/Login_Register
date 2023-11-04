@@ -13,7 +13,7 @@ const Signup = () => {
 
   const handlesubmit=(e)=>{
      e.preventDefault();
-     axios.post('http://localhost:3001/',{name:name,email:email,password:password})
+     axios.post('https://login-register-kappa.vercel.app/',{name:name,email:email,password:password})
      .then(result=>{
       //console.log(result)
       navigate('/login')
